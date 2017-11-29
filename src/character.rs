@@ -32,7 +32,7 @@ macro_rules! one_of (
       use $crate::InputIter;
 
       match ($i).iter_elements().next().map(|c| {
-        (c, c.find_token($inp))
+        (c, $inp.find_token(c))
       }) {
         None             => $crate::need_more($i, Needed::Size(1)),
         Some((_, false)) => Err(Err::Error(error_position!(ErrorKind::OneOf, $i))),
@@ -71,7 +71,7 @@ macro_rules! none_of (
       use $crate::InputIter;
 
       match ($i).iter_elements().next().map(|c| {
-        (c, !c.find_token($inp))
+        (c, !$inp.find_token(c))
       }) {
         None             => $crate::need_more($i, Needed::Size(1)),
         Some((_, false)) => Err(Err::Error(error_position!(ErrorKind::NoneOf, $i))),
