@@ -410,8 +410,8 @@ macro_rules! many_till(
           },
           _                           => {
             match $submac1!(input, $($args1)*) {
-              Err(Err::Error(err))                => {
-                ret = Err(Err::Error(error_node_position!(ErrorKind::ManyTill,input, err)));
+              Err(Err::Error(_err))               => {
+                ret = Err(Err::Error(error_node_position!(ErrorKind::ManyTill,input, _err)));
                 break;
               },
               Err(e) => {

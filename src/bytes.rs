@@ -22,7 +22,7 @@ macro_rules! tag (
     {
       use ::std::result::Result::*;
       use $crate::{Err,Needed,IResult,ErrorKind};
-      use $crate::{Compare,CompareResult,InputLength,Slice,need_more};
+      use $crate::{CompareResult,InputLength,need_more};
 
       let res: IResult<_,_> = match ($i).compare($tag) {
         CompareResult::Ok => {
@@ -105,10 +105,7 @@ macro_rules! is_not(
       use ::std::option::Option::*;
       use $crate::{Err,IResult,ErrorKind};
 
-      use $crate::InputLength;
-      use $crate::InputIter;
       use $crate::FindToken;
-      use $crate::Slice;
 
       let res: IResult<_,_> = match $input.position(|c| {
         $arr.find_token(c)
